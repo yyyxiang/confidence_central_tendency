@@ -351,8 +351,8 @@
   var b = jsPsych.randomization.sampleWithoutReplacement(array2, 1)[0]; // Trial #
 
   var bonus_block = {
-    type: "instructions",
-    pages: function() {
+    type: "html-button-response",
+    stimulus: function() {
       var stim_random = jsPsych.data.get().last(161*(7-a)).values()[4*(b-1)+2].Stimulus; // 161*(7-a): trials from Block a on.
       var estimate_random = jsPsych.data.get().last(161*(7-a)).values()[4*(b-1)+3].Estimate;
       jsPsych.data.addDataToLastTrial({randomBlock: a});
@@ -362,20 +362,21 @@
       var diff = stim_random - estimate_random;
       if (Math.abs(diff) <= 2){
         jsPsych.data.addDataToLastTrial({bonus: true});
-        return ["<p>The trial we randomly picked was Trial " +b+ " of Block " +a+ ".</p>" +
+        return "<p>The trial we randomly picked was Trial " +b+ " of Block " +a+ ".</p>" +
         "<p>The true number of dots on this trial was " +stim_random+ ", and your estimate was " +estimate_random+ ".</p>" +
         "<p>CONGRATULATIONS! Your estimate was within 2 of the true number of dots; you won a bonus of <b>$1</b>.</p>" +
-        "<p> IMPORTANT: Please <b>click 'Next'</b> to complete the experiment.</p>"];
+        "<p> IMPORTANT: Please <b>click 'Next'</b> to complete the experiment.</p>"
       }
         else {
           jsPsych.data.addDataToLastTrial({bonus: false});
-          return ["<p>The trial we randomly picked was Trial " +b+ " of Block " +a+ ".</p>" +
+          return "<p>The trial we randomly picked was Trial " +b+ " of Block " +a+ ".</p>" +
           "<p>The true number of dots on this trial was " +stim_random+ ", and your estimate was " +estimate_random+ ".</p>" +
-          "<p>Oops! Your estimate was not within 2 of the true number of dots; we are sorry that you did not win a bonus.</p>"  +
-          "<p> IMPORTANT: Please <b>click 'Next'</b> to complete the experiment.</p>"];
+          "<p>Oops! Your estimate was not within 2 of the true number of dots; we are sorry that you did not win a bonus.</p>" +
+          "<p> IMPORTANT: Please <b>click 'Next'</b> to complete the experiment.</p>"
         }
     },
-    show_clickable_nav: true
+    choices: ['Next'],
+    response_ends_trial: true
   };
   timeline.push(bonus_block);
 
