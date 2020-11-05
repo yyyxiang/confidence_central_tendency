@@ -40,22 +40,14 @@
   };
   timeline.push(consent_block);
 
-  var comp_code = "8547XU9385A"
-
   var subjectId =  jsPsych.randomization.randomID(8);
+  var fullurl = window.location.href;
+  var mturkId = jsPsych.data.getURLVariable('workerId');
   jsPsych.data.addProperties({
-    subjectId: subjectId
+    subjectId: subjectId, 
+    url: fullurl,
+    mturkId: mturkId
   });
-
-	var fullurl = window.location.href;
-	jsPsych.data.addProperties({
-		url: fullurl
-	});
-
-	var mturkId = jsPsych.data.getURLVariable('workerId');
-	jsPsych.data.addProperties({
-		mturkId: mturkId
-	});
 
   // Fullscreen
   timeline.push({
@@ -417,6 +409,7 @@
   });
 
   //completion code
+  var comp_code = "8547XU9385A"
   timeline.push({
     type: "html-keyboard-response",
     stimulus: "<p> Your response has been recorded!</p>"+
