@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Experiment</title>
+    <title>Estimation Task</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="jspsych-6.1.0/jspsych.js"></script>
     <script src="jspsych-6.1.0/plugins/jspsych-call-function.js"></script>
@@ -336,7 +336,7 @@
     timeline.push(instructions_block, test_procedure);
   }
 
-  // BONUS
+  // Bonus
   var array1 = [1,2,3,4,5,6];
   var a = jsPsych.randomization.sampleWithoutReplacement(array1, 1)[0]; // Block #
   var array2 = Array.from(Array(40), (_, i) => i + 1)
@@ -345,7 +345,7 @@
   var bonus_block = {
     type: "html-button-response",
     stimulus: function() {
-      var stim_random = jsPsych.data.get().last(161*(7-a)).values()[4*(b-1)+2].Stimulus; // 161*(7-a): trials from Block a on.
+      var stim_random = jsPsych.data.get().last(161*(7-a)).values()[4*(b-1)+2].Stimulus; // 161*(7-a): trials from Block a onwards.
       var estimate_random = jsPsych.data.get().last(161*(7-a)).values()[4*(b-1)+3].Estimate;
       jsPsych.data.addDataToLastTrial({randomBlock: a});
       jsPsych.data.addDataToLastTrial({randomTrial: b});
@@ -400,7 +400,7 @@
     xhr.send(JSON.stringify({filename: name, filedata: data}));
   }
 
-  // grab data before the end of the experiment
+  // Grab data before the end of the experiment
   timeline.push({
     type: "call-function",
     func: function(){ saveData_csv(subjectId + '_output', jsPsych.data.get().csv());
@@ -408,7 +408,7 @@
     timing_post_trial: 0
   });
 
-  //completion code
+  // Completion code
   var comp_code = "8547XU9385A"
   timeline.push({
     type: "html-keyboard-response",
@@ -419,7 +419,7 @@
     choices: jsPsych.NO_KEYS
   });
 
-  // start experiment
+  // Start experiment
   jsPsych.init({
     timeline: timeline
   });
