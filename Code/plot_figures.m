@@ -234,7 +234,7 @@ function plot_figures(fig,data)
                     for z = 1:length(stim)
                         istim = data.Stimulus==stim(z);
                         f = length(data.Response(ic&is&istim));
-                        if length(f) == 1
+                        if f == 1
                             variability(z) = NaN;
                         else variability(z) = std(data.Response(ic&is&istim));
                         end
