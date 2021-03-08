@@ -44,8 +44,44 @@ function plot_figures(fig,data)
             yticks([20 40 60]);
             axis square
             
-            
+                    
         case 'fig2b'
+            
+            for i = 1:2
+                ic = data.Condition==i-1;
+                max_stim = max(data.Stimulus); min_stim = min(data.Stimulus);
+                N=6; n = (max_stim-min_stim)/N;
+                edges = min_stim:n:max_stim;
+                
+                m = []; ci = []; x = [];
+                for t = 1:N
+                    u = unique(data.Subject(ic));
+                    dis = zeros(length(u),1);
+                    for s = 1:length(u)
+                        is = data.Subject==u(s);
+                        Y = discretize(data.Stimulus(ic&is),edges);
+                        conf = data.Confidence(ic&is);
+                        dis(s) = mean(conf(Y==t));
+                    end
+                    dis = dis(isnan(dis)==0);
+                    [m(t),~,int] = normfit(dis); ci(t) = diff(int)/2;
+                    x = [x,min_stim+n*t-n/2];
+                end
+                colors = [0.5 0.5 0.5; 0.96 0.6 0.2];
+                errorbar(x,m,ci,'.-','LineWidth',3,'MarkerSize',15,'CapSize',0,'Color',colors(i,:));
+                hold on
+            end
+            
+            legend({'100 ms','2000 ms'},'Location','northwest','FontSize',20);
+            legend('boxoff');
+            set(gca,'XLim',[14.01,65.99],'FontSize',25);
+            set(gca,'YLim',[0,10],'FontSize',25);
+            xlabel('Stimulus','FontSize',25);
+            ylabel('Confidence','FontSize',25);
+            axis square
+     
+            
+        case 'fig2c'
             
             for i = 1:2
                 if i == 1
@@ -85,42 +121,6 @@ function plot_figures(fig,data)
             yticks([20 40 60]);
             axis square
 
-            
-        case 'fig2c'
-            
-            for i = 1:2
-                ic = data.Condition==i-1;
-                max_stim = max(data.Stimulus); min_stim = min(data.Stimulus);
-                N=6; n = (max_stim-min_stim)/N;
-                edges = min_stim:n:max_stim;
-                
-                m = []; ci = []; x = [];
-                for t = 1:N
-                    u = unique(data.Subject(ic));
-                    dis = zeros(length(u),1);
-                    for s = 1:length(u)
-                        is = data.Subject==u(s);
-                        Y = discretize(data.Stimulus(ic&is),edges);
-                        conf = data.Confidence(ic&is);
-                        dis(s) = mean(conf(Y==t));
-                    end
-                    dis = dis(isnan(dis)==0);
-                    [m(t),~,int] = normfit(dis); ci(t) = diff(int)/2;
-                    x = [x,min_stim+n*t-n/2];
-                end
-                colors = [0.5 0.5 0.5; 0.96 0.6 0.2];
-                errorbar(x,m,ci,'.-','LineWidth',3,'MarkerSize',15,'CapSize',0,'Color',colors(i,:));
-                hold on
-            end
-            
-            legend({'100 ms','2000 ms'},'Location','northwest','FontSize',20);
-            legend('boxoff');
-            set(gca,'XLim',[14.01,65.99],'FontSize',25);
-            set(gca,'YLim',[0,10],'FontSize',25);
-            xlabel('Stimulus','FontSize',25);
-            ylabel('Confidence','FontSize',25);
-            axis square
-     
             
         case 'fig2d'
 
