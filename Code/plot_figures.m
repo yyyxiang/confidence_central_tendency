@@ -174,8 +174,8 @@ function plot_figures(fig,data)
                 conf = zeros(length(mag),1);
                 for j = 1:length(mag)
                     jm = data.Stimulus==mag(j);
-                    f = find(jm&is);
-                    if length(f) == 1
+                    f = length(data.Response(jm&is));
+                    if f == 1
                         vari(j) = NaN;
                     else vari(j) = std(data.Response(jm&is));
                          conf(j) = mean(data.Confidence(jm&is));
@@ -199,8 +199,8 @@ function plot_figures(fig,data)
                 dis = zeros(length(u),1);
                 for i = 1:length(u)
                     is = tbl.Subject==u(i);
-                    f = find(tbl.Variability(is&Y==t));
-                    if length(f) == 1
+                    f = length(tbl.Variability(is&Y==t));
+                    if f == 1
                         dis(i) = NaN;
                     else dis(i) = mean(tbl.Variability(is&Y==t));
                     end
@@ -233,7 +233,7 @@ function plot_figures(fig,data)
                     variability = zeros(length(stim),1);
                     for z = 1:length(stim)
                         istim = data.Stimulus==stim(z);
-                        f = find(ic&is&istim);
+                        f = length(data.Response(ic&is&istim));
                         if length(f) == 1
                             variability(z) = NaN;
                         else variability(z) = std(data.Response(ic&is&istim));
