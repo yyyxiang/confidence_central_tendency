@@ -86,7 +86,8 @@ function plot_figures(fig,data)
             for i = 1:2
                 if i == 1
                     ic = data.Confidence<=3;
-                else ic = data.Confidence>=7;
+                else 
+                    ic = data.Confidence>=7;
                 end
                 max_stim = max(data.Stimulus); min_stim = min(data.Stimulus);
                 N=6; n = (max_stim-min_stim)/N;
@@ -177,8 +178,9 @@ function plot_figures(fig,data)
                     f = length(data.Response(jm&is));
                     if f == 1
                         vari(j) = NaN;
-                    else vari(j) = std(data.Response(jm&is));
-                         conf(j) = mean(data.Confidence(jm&is));
+                    else 
+                        vari(j) = std(data.Response(jm&is));
+                        conf(j) = mean(data.Confidence(jm&is));
                     end
                 end
                 conf = conf(isnan(vari)==0); confidence = [confidence;conf];
@@ -199,11 +201,7 @@ function plot_figures(fig,data)
                 dis = zeros(length(u),1);
                 for i = 1:length(u)
                     is = tbl.Subject==u(i);
-                    f = length(tbl.Variability(is&Y==t));
-                    if f == 1
-                        dis(i) = NaN;
-                    else dis(i) = mean(tbl.Variability(is&Y==t));
-                    end
+                    dis(i) = mean(tbl.Variability(is&Y==t));
                 end
                 dis = dis(isnan(dis)==0);
                 [m(t),~,int] = normfit(dis); ci(t) = diff(int)/2;
@@ -212,11 +210,11 @@ function plot_figures(fig,data)
             
             errorbar(x,m,ci,'.-','LineWidth',3,'MarkerSize',30,'CapSize',0,'Color','k');
             set(gca,'XLim',[-0.5,10.5],'FontSize',25);
-            set(gca,'YLim',[3,7.3],'FontSize',25);
+            set(gca,'YLim',[2,9],'FontSize',25);
             xlabel('Confidence','FontSize',25);
             ylabel('Response Variability (SD)','FontSize',25);
-            xticks([0 2 4 6 8 10]);
-            yticks([3 4 5 6 7]);
+            xticks(0:2:10);
+            yticks(2:2:8);
             axis square
             
             
@@ -236,7 +234,8 @@ function plot_figures(fig,data)
                         f = length(data.Response(ic&is&istim));
                         if f == 1
                             variability(z) = NaN;
-                        else variability(z) = std(data.Response(ic&is&istim));
+                        else
+                            variability(z) = std(data.Response(ic&is&istim));
                         end
                     end
                     dis(s) = mean(variability(isnan(variability)==0));
@@ -251,10 +250,10 @@ function plot_figures(fig,data)
             legend('boxoff'); legend('AutoUpdate','off');
             plot([1.07,2.93],m,'--','color',[0.5,0.5,0.5]);
             set(gca,'XLim',[0.5,3.5],'FontSize',25);
-            set(gca,'YLim',[3,7.3],'FontSize',25);
+            set(gca,'YLim',[2,9],'FontSize',25);
             xlabel('Stimulus Duration','FontSize',25);
             ylabel('Response Variability (SD)','FontSize',25);
-            xticks([1 3]); xticklabels({' ',' '}); yticks([3 4 5 6 7]);
+            xticks([1 3]); xticklabels({' ',' '}); yticks(2:2:8);
             axis square
             
             
