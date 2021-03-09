@@ -212,7 +212,7 @@ function plot_figures(fig,data)
             
             errorbar(x,m,ci,'.-','LineWidth',3,'MarkerSize',30,'CapSize',0,'Color','k');
             set(gca,'XLim',[-0.5,10.5],'FontSize',25);
-            set(gca,'YLim',[3,7],'FontSize',25);
+            set(gca,'YLim',[3,7.3],'FontSize',25);
             xlabel('Confidence','FontSize',25);
             ylabel('Response Variability (SD)','FontSize',25);
             xticks([0 2 4 6 8 10]);
@@ -251,7 +251,7 @@ function plot_figures(fig,data)
             legend('boxoff'); legend('AutoUpdate','off');
             plot([1.07,2.93],m,'--','color',[0.5,0.5,0.5]);
             set(gca,'XLim',[0.5,3.5],'FontSize',25);
-            set(gca,'YLim',[3,7],'FontSize',25);
+            set(gca,'YLim',[3,7.3],'FontSize',25);
             xlabel('Stimulus Duration','FontSize',25);
             ylabel('Response Variability (SD)','FontSize',25);
             xticks([1 3]); xticklabels({' ',' '}); yticks([3 4 5 6 7]);
