@@ -109,7 +109,7 @@ function output = lme_regression(model,data)
                     cond = zeros(length(mag),1);
                     for j = 1:length(mag)
                         jm = data.Stimulus==mag(j);
-                        f = data.Response((jm&is&iz));
+                        f = length(data.Response(jm&is&iz));
                         if f == 1
                             vari(j) = NaN;
                         else vari(j) = std(data.Response(jm&is&iz));
