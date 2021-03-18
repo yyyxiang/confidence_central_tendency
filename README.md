@@ -1,6 +1,6 @@
 # Confidence and Central Tendency
 
-Code and data for: Xiang, Y., Graeber, T., Enke, B., & Gershman, S.J. Bayesian signatures of confidence and central tendency in perceptual judgment. (submitted)
+Code and data for: Xiang, Y., Graeber, T., Enke, B., & Gershman, S.J. (in press). Confidence and central tendency in perceptual judgment. Attention, Perception, & Psychophysics.
 
 Data for the re-analysis can be found from the Confidence Database: https://osf.io/s46pr/
 
