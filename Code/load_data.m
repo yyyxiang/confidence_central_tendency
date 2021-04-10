@@ -67,7 +67,7 @@ function data = load_data(dataset)
             
         case 'RZ14'
             
-            tbl = readtable(['../Data/data_Rausch_2014.csv']);
+            tbl = readtable('../Data/data_Rausch_2014.csv');
             tbl.Subject = tbl.Subj_idx;
             tbl.Scale = [];
             data = tbl;
