@@ -83,8 +83,9 @@ function output = lme_regression(model,data)
                     f = length(data.Response(jm&is));
                     if f == 1
                         vari(j) = NaN;
-                    else vari(j) = std(data.Response(jm&is));
-                         conf(j) = mean(data.Confidence(jm&is));
+                    else 
+                        vari(j) = std(data.Response(jm&is));
+                        conf(j) = mean(data.Confidence(jm&is));
                     end
                 end
                 conf = conf(isnan(vari)==0); confidence = [confidence;conf];
@@ -112,8 +113,9 @@ function output = lme_regression(model,data)
                         f = length(data.Response(jm&is&iz));
                         if f == 1
                             vari(j) = NaN;
-                        else vari(j) = std(data.Response(jm&is&iz));
-                             cond(j) = z-1;
+                        else 
+                            vari(j) = std(data.Response(jm&is&iz));
+                            cond(j) = z-1;
                         end
                     end
                     cond = cond(isnan(vari)==0); condition = [condition;cond];
