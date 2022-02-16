@@ -44,7 +44,7 @@
   var fullurl = window.location.href;
   var mturkId = jsPsych.data.getURLVariable('workerId');
   jsPsych.data.addProperties({
-    subjectId: subjectId, 
+    subjectId: subjectId,
     url: fullurl,
     mturkId: mturkId
   });
@@ -277,7 +277,7 @@
     repetitions: 5,
     randomize_order: true,
     timeline_variables: duration,
-    data: {exp_part:"training", Block: 0}
+    data: {Block: 0}
   }
   timeline.push(training_procedure);
 
@@ -331,7 +331,7 @@
       repetitions: 20,
       randomize_order: true,
       timeline_variables: duration,
-      data: {exp_part:"block_"+(i+1), Block: i+1, Ave_stim: ave_stim[i]}
+      data: {Block: i+1, Ave_stim: ave_stim[i]}
     }
     timeline.push(instructions_block, test_procedure);
   }
@@ -345,12 +345,9 @@
   var bonus_block = {
     type: "html-button-response",
     stimulus: function() {
-      var stim_random = jsPsych.data.get().last(161*(7-a)).values()[4*(b-1)+2].Stimulus; // 161*(7-a): trials from Block a onwards.
-      var estimate_random = jsPsych.data.get().last(161*(7-a)).values()[4*(b-1)+3].Estimate;
-      jsPsych.data.addDataToLastTrial({randomBlock: a});
-      jsPsych.data.addDataToLastTrial({randomTrial: b});
-      jsPsych.data.addDataToLastTrial({stim_random: stim_random});
-      jsPsych.data.addDataToLastTrial({estimate_random: estimate_random});
+      var stim_random = jsPsych.data.get().filter({Block: a}).select('Stimulus').values[b-1];
+      var estimate_random = jsPsych.data.get().filter({Block: a}).select('Estimate').values[b-1];
+      jsPsych.data.addDataToLastTrial({randomBlock: a, randomTrial: b, stim_random: stim_random, estimate_random: estimate_random});
       var diff = stim_random - estimate_random;
       if (Math.abs(diff) <= 2){
         jsPsych.data.addDataToLastTrial({bonus: true});
