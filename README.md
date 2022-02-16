@@ -1,6 +1,6 @@
 # Confidence and Central Tendency
 
-Code and data for: Xiang, Y., Graeber, T., Enke, B., & Gershman, S.J. (in press). Confidence and central tendency in perceptual judgment. Attention, Perception, & Psychophysics.
+Code and data for: Xiang, Y., Graeber, T., Enke, B., & Gershman, S.J. (2021). Confidence and central tendency in perceptual judgment. Attention, Perception, & Psychophysics, 83, 3024-3034.
 
 Data for the re-analysis can be found from the Confidence Database: https://osf.io/s46pr/
 
